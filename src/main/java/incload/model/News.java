@@ -2,12 +2,13 @@ package incload.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-@Data
-@AllArgsConstructor
-public class News {
-    private String title;
-    private String description;
-    private String date;
+import java.util.Date;
 
 
+public class News extends Event {
+
+    public News(String title, String description, String link, Date date, String hashtag) {
+        super(title, description, link, date, hashtag);
+    }
 }
+
