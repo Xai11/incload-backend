@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 public class NewsController {
-
+    //
     private NewsService newsService;
     private News news;
 
