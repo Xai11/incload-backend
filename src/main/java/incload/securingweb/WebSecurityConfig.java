@@ -20,14 +20,12 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/", "/home").permitAll()
                         .anyRequest().permitAll()
-
                 )
                 .formLogin((form) -> form
                         .loginPage("/login")
                         .permitAll()
                 )
-                .logout((logout) -> logout.permitAll()).csrf().disable();
-
+                .logout((logout) -> logout.permitAll());
 
         return http.build();
     }
