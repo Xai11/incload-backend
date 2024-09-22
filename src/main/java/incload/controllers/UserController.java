@@ -1,5 +1,6 @@
 package incload.controllers;
 
+import incload.model.Team;
 import incload.model.User;
 import incload.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

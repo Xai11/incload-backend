@@ -21,6 +21,11 @@ public class Team {
     private String name;
     @Column
     private int maxTeamates; //максимальное количество участников без подписки / с подпиской
+
+    @OneToMany(mappedBy = "team")
+    private List<User> user;
+    @OneToOne(mappedBy = "team")
+    private User creator;
     @Column
     private int lvl;
     @Column
