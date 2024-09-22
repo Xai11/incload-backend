@@ -1,5 +1,6 @@
 package incload.controllers;
 
+import incload.model.InviteRequast;
 import incload.model.Team;
 import incload.model.TeamRequest;
 import incload.service.TeamsService;
@@ -32,5 +33,15 @@ public class TeamsController {
     @GetMapping("/team/name={name}")
     public Team getId(@PathVariable String name){
         return teamsService.getId(name).orElse(null);
+    }
+
+    @PostMapping("/team/join")
+    public void joinTeam(@RequestBody InviteRequast inviteRequast){
+        teamsService.addUserToTeam(inviteRequast.getIdTeam(), inviteRequast.getUsername());
+    }
+
+    @GetMapping("/team/username={username}")
+    public String getTeam(@PathVariable String username){
+        return teamsService.getTeamWithUser(username);
     }
 }

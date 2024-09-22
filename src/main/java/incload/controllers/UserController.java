@@ -25,4 +25,6 @@ public class UserController {
     public void regUser(@RequestBody User user){
         userService.saveUser(user.getUsername());
     }
+
+
 }
