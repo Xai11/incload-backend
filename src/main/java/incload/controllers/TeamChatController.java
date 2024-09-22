@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/teamchat")
+@RequestMapping("teamchat")
 public class TeamChatController {
 
     @Autowired
