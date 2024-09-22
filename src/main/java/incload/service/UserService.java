@@ -1,6 +1,8 @@
 package incload.service;
 
+import incload.model.Team;
 import incload.model.User;
+import incload.repository.TeamRepo;
 import incload.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +27,7 @@ public class UserService {
     }
 
     public void saveUser(String username) {
+
         User user = new User();
         user.setUsername(username);
         userRepo.save(user);

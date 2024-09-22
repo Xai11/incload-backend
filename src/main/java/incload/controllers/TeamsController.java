@@ -1,9 +1,8 @@
 package incload.controllers;
 
 import incload.model.Team;
-import incload.model.User;
+import incload.model.TeamRequest;
 import incload.service.TeamsService;
-import incload.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,13 +19,18 @@ public class TeamsController {
         this.teamsService = teamsService;
     }
 
-    @GetMapping("/team/{id}")
+    @GetMapping("/team/id={id}")
     public Optional<Team> getTeam(@PathVariable Long id){
         return teamsService.getTeam(id);
     }
 
     @PostMapping("/team/create")
-    public void createTeam(@RequestBody Team team){
-        teamsService.saveTeam(team.getName());
+    public void createTeam(@RequestBody TeamRequest teamRequest){
+        teamsService.saveTeam(teamRequest.getTeam().getName(), teamRequest.getUsername());
+    }
+
+    @GetMapping("/team/name={name}")
+    public Team getId(@PathVariable String name){
+        return teamsService.getId(name).orElse(null);
     }
 }

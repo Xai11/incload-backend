@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 
 @Entity
 @Data
@@ -20,8 +19,8 @@ public class User {
     private String username; //uniq
     @Column
     private String name; //?
-//    @Column
-//    private Team team;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Team team;
     @Column
     private int score;
     @Column
