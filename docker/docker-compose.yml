@@ -16,5 +16,5 @@ services:
         image: "postgres"
         container_name: db
         environment:
-            - POSTGRES_USER=alex
-            - POSTGRES_PASSWORD=password
+            - POSTGRES_USER=developer
+            - POSTGRES_PASSWORD=DeveloperRoot
