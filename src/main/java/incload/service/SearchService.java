@@ -1,4 +1,4 @@
-package incload.request;
+package incload.service;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
@@ -37,9 +37,6 @@ public class SearchService {
                 }
                 in.close();
 
-                System.out.println("GET Response Code: " + responseCode);
-                System.out.println(response);
-
                 DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
                 DocumentBuilder builder = factory.newDocumentBuilder();
                 InputSource is = new InputSource(new StringReader(response.toString()));
@@ -58,7 +55,6 @@ public class SearchService {
                 }
 
             } else {
-                //System.out.println("GET request failed with code: " + responseCode);
                 urlFoundSites.add("Error request");
             }
         } catch (Exception e){

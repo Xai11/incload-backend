@@ -1,6 +1,6 @@
 package incload.controllers;
 
-import incload.request.SearchService;
+import incload.service.SearchService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
