@@ -14,6 +14,7 @@ public class SearhRequest {
     private ArrayList<String> urlFoundSites = new ArrayList<String>();
     public SearhRequest(String request){
         this.request = request;
+        Searh();
     }
     public void Searh() {
         String replacedRequest = request.replaceAll(" ", "+");
@@ -24,6 +25,7 @@ public class SearhRequest {
             HttpURLConnection con = (HttpURLConnection) obj.openConnection();
             con.setRequestMethod("GET");
             int responseCode = con.getResponseCode();
+
             if (responseCode == HttpURLConnection.HTTP_OK) {
                 BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
                 String inputLine;
@@ -34,9 +36,9 @@ public class SearhRequest {
                 }
                 in.close();
 
-                System.out.println("GET Response Code: " + responseCode);
+//                System.out.println("GET Response Code: " + responseCode);
+//                System.out.println(response);
 
-                System.out.println(response);
                 DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
                 DocumentBuilder builder = factory.newDocumentBuilder();
                 InputSource is = new InputSource(new StringReader(response.toString()));
@@ -44,17 +46,19 @@ public class SearhRequest {
 
                 NodeList nodeList = doc.getElementsByTagName("url");
                 String urlSite;
+
                 for (int i = 0; i < nodeList.getLength() && i < 5; i++) {
                     Element element = (Element) nodeList.item(i);
                     urlSite = element.getTextContent();
                     urlFoundSites.add(urlSite);
-                    System.out.println(urlSite);
                 }
-                System.out.println(urlFoundSites);
+                if(urlFoundSites.isEmpty()){
+                    urlFoundSites.add("Incorrect question");
+                }
 
             } else {
-                System.out.println("GET request failed with code: " + responseCode);
-                urlFoundSites.add("");
+                //System.out.println("GET request failed with code: " + responseCode);
+                urlFoundSites.add("Error request");
             }
         } catch (Exception e){
             e.printStackTrace();
