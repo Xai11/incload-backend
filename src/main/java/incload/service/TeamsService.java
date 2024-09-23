@@ -41,8 +41,17 @@ public class TeamsService {
     public void saveTeam(String name, String username){
         Team team = new Team();
         team.setName(name);
-        team.setCreator(userService.getUser(username));
+        User user = userService.getUser(username);
+        team.setCreator(user);
         teamRepo.save(team);
+
+        // Создаем связь между пользователем и командой
+        UserTeam userTeam = new UserTeam(team, user);
+        userTeamRepo.save(userTeam);
+    }
+
+    public List<User> findUsersByTeamId(Long teamId) {
+        return userTeamRepo.findUsersByTeamId(teamId);
     }
 
     public void addUserToTeam(Long teamId, String username) {
@@ -63,10 +72,9 @@ public class TeamsService {
             }
         }
     }
-
-    public String getTeamWithUser(String username){
-        Optional<UserTeam> userTeamOptional = userTeamRepo.findByUser_Username(username);
-        return userTeamOptional.map(userTeam -> userTeam.getTeam().getName()).orElse("Team not found");
+//
+    public Long findTeamIdByUsername(String username) {
+        return userTeamRepo.findTeamIdByUsername(username);
     }
 
 }

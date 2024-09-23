@@ -12,7 +12,4 @@ import java.util.Optional;
 @Repository
 public interface TeamRepo extends JpaRepository <Team, Long> {
     public Optional<Team> findByName(String name);
-
-    @Query("SELECT t.name FROM Team t JOIN t.users ut WHERE ut.user.id = :userId")
-    String findTeamNamesByUserId(@Param("userId") Long userId);
 }
