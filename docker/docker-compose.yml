@@ -7,9 +7,9 @@ services:
         ports:
             - '127.0.0.1:8080:8080'
         environment:
-            - DB_USER=alex
+            - DB_USER=developer
             - DB_URL=jdbc:postgresql://db:5432/incload_db
-            - DB_PASSWORD=password
+            - DB_PASSWORD=DeveloperRoot
         depends_on:
             - db
     db:
