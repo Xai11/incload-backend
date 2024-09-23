@@ -8,11 +8,12 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.*;
 import java.net.*;
 import java.util.ArrayList;
+import java.util.List;
 
-public class SearhRequest {
+public class SearchService {
     private String request;
-    private ArrayList<String> urlFoundSites = new ArrayList<String>();
-    public SearhRequest(String request){
+    private List<String> urlFoundSites = new ArrayList<>();
+    public SearchService(String request){
         this.request = request;
         Searh();
     }
@@ -36,8 +37,8 @@ public class SearhRequest {
                 }
                 in.close();
 
-//                System.out.println("GET Response Code: " + responseCode);
-//                System.out.println(response);
+                System.out.println("GET Response Code: " + responseCode);
+                System.out.println(response);
 
                 DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
                 DocumentBuilder builder = factory.newDocumentBuilder();
@@ -47,7 +48,7 @@ public class SearhRequest {
                 NodeList nodeList = doc.getElementsByTagName("url");
                 String urlSite;
 
-                for (int i = 0; i < nodeList.getLength() && i < 5; i++) {
+                for (int i = 0; i < nodeList.getLength() && i < 10; i++) {
                     Element element = (Element) nodeList.item(i);
                     urlSite = element.getTextContent();
                     urlFoundSites.add(urlSite);
@@ -65,7 +66,7 @@ public class SearhRequest {
         }
 
     }
-    public ArrayList<String> getUrlFoundSites(){
+    public List<String> getUrlFoundSites(){
         return urlFoundSites;
     }
 }
