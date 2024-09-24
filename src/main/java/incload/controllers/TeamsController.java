@@ -4,9 +4,11 @@ import incload.model.InviteRequast;
 import incload.model.Team;
 import incload.model.TeamRequest;
 import incload.model.User;
-import incload.repository.UserTeamRepo;
 import incload.service.TeamsService;
+import incload.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Time;
@@ -17,7 +19,9 @@ import static java.lang.Thread.sleep;
 
 @RestController
 public class TeamsController {
+    @Autowired
     private TeamsService teamsService;
+
 
     @Autowired
     public TeamsController(TeamsService teamsService) {
@@ -30,9 +34,9 @@ public class TeamsController {
     }
 
     @PostMapping("/team/create")
+    @PreAuthorize("isAuthenticated()")
     public void createTeam(@RequestBody TeamRequest teamRequest){
         teamsService.saveTeam(teamRequest.getTeam().getName(), teamRequest.getUser().getUsername());
-        System.out.println(teamRequest.getTeam());
     }
 
     @GetMapping("/team/name={name}")
@@ -41,8 +45,12 @@ public class TeamsController {
     }
 
     @PostMapping("/team/join")
+    @PreAuthorize("hasPermission(#idTeam, 'TEAM_EDIT')")
     public void joinTeam(@RequestBody InviteRequast inviteRequast) {
-        teamsService.addUserToTeam(inviteRequast.getIdTeam(), inviteRequast.getUsername());
+        Optional<Team> teamOptional = teamsService.getTeam(inviteRequast.getIdTeam());
+        teamOptional.ifPresent(team -> {
+            teamsService.addUserToTeam(inviteRequast.getIdTeam(), inviteRequast.getUsername());
+        });
     }
 
     @GetMapping("/team/username={username}")

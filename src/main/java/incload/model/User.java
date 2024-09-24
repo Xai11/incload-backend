@@ -30,7 +30,7 @@ public class User {
     @Column
     private String description;
     @Column
-    private String role; //dragonDropом (роль в команде - заполняет тимлид)
+    private String role;
     @Column
     private String languageP; //язык программирования
 }

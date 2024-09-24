@@ -8,6 +8,7 @@ import incload.repository.UserRepo;
 import incload.repository.UserTeamRepo;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -57,8 +58,15 @@ public class TeamsService {
     public void addUserToTeam(Long teamId, String username) {
         Team team = teamRepo.findById(teamId).orElseThrow();
         User user = userRepo.findByUsername(username);
-        UserTeam userTeam = new UserTeam(team, user);
-        userTeamRepo.save(userTeam);
+        User currentUser = userService.getCurrentUser();
+
+        if (team.getCreator().getId().equals(currentUser.getId())) {
+            // Только создатель команды может добавлять пользователей в команду
+            UserTeam userTeam = new UserTeam(team, user);
+            userTeamRepo.save(userTeam);
+        } else {
+            throw new AccessDeniedException("Только создатель команды может добавлять пользователей в команду");
+        }
     }
 
     public void removeUserFromTeam(Long teamId, Long userId) {

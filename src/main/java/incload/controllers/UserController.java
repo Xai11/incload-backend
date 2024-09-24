@@ -26,5 +26,11 @@ public class UserController {
         userService.saveUser(user.getUsername());
     }
 
+    @PatchMapping("/user/{id}")
+    public void updateUser(@PathVariable Long id, @RequestBody User user) {
+        userService.updateUser(id, user.getName(), user.getImages(), user.getDescription(),
+                user.getRole(), user.getLanguageP());
+    }
+
 
 }
