@@ -22,7 +22,8 @@ public class Team {
     @Column
     private int maxTeamates; //максимальное количество участников без подписки / с подпиской
 
-    @OneToMany(mappedBy = "team")
+    @OneToMany
+    @JoinColumn(name = "team_id")
     private List<User> user;
     @OneToOne(mappedBy = "team")
     private User creator;
