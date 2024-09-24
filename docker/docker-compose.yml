@@ -2,7 +2,7 @@ version: '3.1'
 
 services:
     app:
-        image: '03b29f2e05cd'
+        image: '37dbb6e327d1'
         container_name: incload_app
         ports:
             - '127.0.0.1:8080:8080'
