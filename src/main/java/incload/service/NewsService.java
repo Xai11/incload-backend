@@ -25,10 +25,7 @@ public class NewsService {
     public NewsService(){
         newsList = new ArrayList<>();
 //
-//        News news1 = new News("Образование","эта штука точно поможет твоим мозгам, мажь её на свой пенис " +
-//                                "2-3 раза в день и ты увидишь результат...","http://dlflsflfs", "sdasd");
-//
-//        newsList.addAll(Arrays.asList(news1));
+//        Доделать
 
     }
     public List<News> getNews(){
