@@ -19,7 +19,9 @@ public class SearchService {
     }
     public void Searh() {
         String replacedRequest = request.replaceAll(" ", "+");
-        String url = "https://yandex.ru/search/xml?folderid=b1gh2cb3337u5i588rg2&apikey=AQVNxRhJDQhhufnpqJKc2TkDUT-pnXCBzdPu86Pq&query=" + replacedRequest + "&l10n=ru&sortby=rlv.order%253Ddescending&filter=strict&maxpassages=1&groupby=attr%253D.mode%253Dflat.groups-on-page%253D10.docs-in-group%253D1";
+        String url = "https://yandex.ru/search/xml?folderid=b1gh2cb3337u5i588rg2&apikey=AQVNxRhJDQhhufnpqJKc2TkDUT-pnXCBzdPu86Pq&query="
+            + replacedRequest + 
+            "&l10n=ru&sortby=rlv.order%253Ddescending&filter=strict&maxpassages=1&groupby=attr%253D.mode%253Dflat.groups-on-page%253D10.docs-in-group%253D1";
 
         try {
             URL obj = new URL(url);
